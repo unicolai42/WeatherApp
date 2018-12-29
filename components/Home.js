@@ -1,6 +1,6 @@
 import React from 'react'
-import {Button, TextInput, View, Text, ImageBackground} from 'react-native'
-import {createStackNavigator} from 'react-navigation'
+import {TouchableOpacity, TextInput, View, Text, ImageBackground, Image} from 'react-native'
+// import {createStackNavigator} from 'react-navigation'
 import { Font, AppLoading } from "expo"
 
 import {home} from './Style'
@@ -12,7 +12,8 @@ export default class Home extends React.Component {
 
     state = {
         search: '',
-        fontLoaded: true
+        fontLoaded: true,
+        errMsg: false
     }
 
     async componentWillMount() {
@@ -25,7 +26,10 @@ export default class Home extends React.Component {
     }
 
     submit() {
-        this.props.navigation.navigate('List', {city: this.state.search})
+        if (this.state.search)
+            this.props.navigation.navigate('List', {city: this.state.search})
+        else
+            this.setState({errMsg: true})
     }
 
     render() {
@@ -37,21 +41,25 @@ export default class Home extends React.Component {
         else
             return (
                 <ImageBackground source={require('../images/home.jpg')} style={home.image} >
-                    <View style={home.view}>
-                        <Text style={home.title}>Weather App</Text> 
-                        <TextInput
-                            style={[home.input, (this.state.search) ? {fontFamily: 'Montserrat-Light'} : {fontFamily: 'Montserrat-LightItalic'}]}
-                            placeholder='Enter the name of a city'
-                            placeholderTextColor='black'
-                            onChangeText={(search) => this.setState({search})}
-                            value={this.state.search}
-                            onSubmitEditing={() => this.submit()}
-                        />
-                        <Button
+                    <View style={home.container}>
+                        <Text style={home.title}>Weather App</Text>
+                        <View style={home.search}>
+                            <Image source={require('../images/weather.png')} style={home.iconWeather} />
+                            <TextInput
+                                style={[home.input, {fontFamily: 'Montserrat-Light'}]}
+                                placeholder='Enter the name of a city'
+                                placeholderTextColor='#f9f9f9'
+                                onChangeText={(search) => this.setState({search})}
+                                value={this.state.search}
+                                onSubmitEditing={() => this.submit()}
+                            />
+                        </View>
+                        <TouchableOpacity
                             style={home.button}
                             onPress={() => {this.submit()}}
-                            title="START"
-                        />
+                            underlayColor='#fff'>
+                            <Text style={[home.txtButton, {fontFamily: 'Montserrat-Light'}]}>SEARCH</Text>
+                        </TouchableOpacity>
                     </View>          
                 </ImageBackground>
             )

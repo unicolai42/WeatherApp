@@ -1,41 +1,53 @@
 module.exports = {
     home: {
         image: {
-            flex: 1,
             position: 'absolute',
             width: '100%',
             height: '100%',
             justifyContent: 'center'
         },
-        view: {
-            height: '65%',
-            borderWidth: 1,
-            borderColor: 'black'
+        container: {
+            height: '65%'
         },
         title: {
             fontFamily: 'Montserrat-Light',
             fontSize: 42,
             color: 'white',
-            textAlign: 'center',
-            borderWidth: 1,
-            borderColor: 'red'
+            textAlign: 'center'
+        },
+        search: {
+            borderBottomColor: '#e0e0e0',
+            borderBottomWidth: 1,
+            marginTop: '30%',
+            marginRight: '10%',
+            marginLeft: '10%',
+            flexDirection: 'row',
+            paddingBottom: 7
+        },
+        iconWeather: {
+            width: 22,
+            height: 22,
+            marginRight: 10
         },
         input: {
-            fontSize: 16,
-            height: 40,
-            borderColor: 'gray',
-            borderWidth: 1,
-            marginTop: '25%',
+            fontSize: 17,
             fontStyle: 'italic',
-            borderWidth: 1,
-            borderColor: 'red',
-            textAlign: 'center',
+            alignItems: 'flex-end',
+            height: 22,
+            color: '#fff'
         },
         button: {
-            borderWidth: 1,
-            borderColor: 'blue',
-            marginTop: 10,
-            fontSize: 100
+            backgroundColor: 'white',
+            borderRadius: 2,
+            marginRight: '10%',
+            marginLeft: '10%',
+            marginTop: 15,
+            paddingVertical: 8,
+        },
+        txtButton: {
+            color: '#d5aaed',
+            fontSize: 17,
+            textAlign: 'center'
         }
     }
 }
