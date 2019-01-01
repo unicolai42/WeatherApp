@@ -54,5 +54,13 @@ module.exports = {
             textAlign: 'center',
             marginTop: 10
         }
+    },
+    list: {
+        return: {
+            width: 32,
+            height: 32,
+            marginTop: 35,
+            marginLeft: 3
+        }
     }
 }

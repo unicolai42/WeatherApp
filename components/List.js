@@ -1,9 +1,10 @@
 import React from 'react'
-import {ListView, Text, ActivityIndicator} from 'react-native'
+import {ListView, ImageBackground, TouchableHighlight, Image, ActivityIndicator} from 'react-native'
 import axios from 'axios'
 
 import Row from './Row'
 import {openWeatherKey} from '../config/ApiKey'
+import {home, list} from './Style'
 
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -11,7 +12,8 @@ const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 export default class List extends React.Component {
     static navigationOptions = ({navigation}) => {
         return {
-            title: `Meteo / ${navigation.state.params.city}`
+            // title: `Meteo / ${navigation.state.params.city}`
+            header: null
         }
     }
 
@@ -48,11 +50,17 @@ export default class List extends React.Component {
     render() {
         if (this.state.loaded)
             return (
-                <ListView
-                    style={{marginTop: 20}}
-                    dataSource={this.state.dataSource}
-                    renderRow={(rowData, s, i) => <Row index={parseInt(i, 10)} data={rowData} />}
-                />
+                <ImageBackground source={require('../images/home.jpg')} style={home.image} >    
+                    <TouchableHighlight
+                        onPress={() => {this.props.navigation.navigate('Home')}}>
+                        <Image source={require('../images/return.png')} style={list.return} />
+                    </TouchableHighlight>            
+                    <ListView
+                        style={{marginTop: 20}}
+                        dataSource={this.state.dataSource}
+                        renderRow={(rowData, s, i) => <Row index={parseInt(i, 10)} data={rowData} />}
+                    />
+                </ImageBackground>
             )
         else
             return (
