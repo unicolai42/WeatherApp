@@ -48,6 +48,11 @@ module.exports = {
             color: '#d5aaed',
             fontSize: 17,
             textAlign: 'center'
+        },
+        errMsg: {
+            color: 'red',
+            textAlign: 'center',
+            marginTop: 10
         }
     }
 }

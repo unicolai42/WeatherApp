@@ -18,7 +18,8 @@ export default class List extends React.Component {
     state = {
         city: this.props.navigation.state.params.city,
         report: {},
-        dataSource: ds
+        dataSource: ds,
+        loaded: false
     }
 
     componentDidMount() {
@@ -28,7 +29,9 @@ export default class List extends React.Component {
     fetchWeather() {
         axios.get(`https://api.openweathermap.org/data/2.5/forecast/daily?q=${this.state.city}&units=metric&appid=${openWeatherKey}`)
         .then(({data}) => {
+            console.log('data', data)
             this.setState({
+                loaded: true,
                 report: data,
                 dataSource: ds.cloneWithRows(data.list)
             })
@@ -36,21 +39,24 @@ export default class List extends React.Component {
         .then(() => {
             console.log('report', this.state.report)
         })
+        .catch((error) => {
+            this.props.navigation.navigate('Home', {errCity: this.state.city})
+        })
     }
 
 
     render() {
-        if (this.state.report === null)
-            return (
-                <ActivityIndicator color={'#0000ff'} size={'large'}/>
-            )
-        else
+        if (this.state.loaded)
             return (
                 <ListView
                     style={{marginTop: 20}}
                     dataSource={this.state.dataSource}
                     renderRow={(rowData, s, i) => <Row index={parseInt(i, 10)} data={rowData} />}
                 />
+            )
+        else
+            return (
+                <ActivityIndicator color={'#0000ff'} size={'large'}/>
             )
     } 
 }

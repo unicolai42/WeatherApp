@@ -7,13 +7,15 @@ import {home} from './Style'
 
 export default class Home extends React.Component {
     static navigationOptions = {
-        header: null
+        header: null,
+        errCity: '',
+        emptyTxt: false
     }
 
     state = {
         search: '',
         fontLoaded: true,
-        errMsg: false
+        errMsg: null
     }
 
     async componentWillMount() {
@@ -26,13 +28,17 @@ export default class Home extends React.Component {
     }
 
     submit() {
-        if (this.state.search)
+        if (this.state.search) {
+            this.setState({search: '', emptyTxt: false})
             this.props.navigation.navigate('List', {city: this.state.search})
+        }
         else
-            this.setState({errMsg: true})
+            this.setState({emptyTxt: true})
     }
 
     render() {
+        let errMsg = (this.props.navigation.state.params) ? <Text style={[home.errMsg, {fontFamily: 'Montserrat-LightItalic'}]}>{`${this.props.navigation.state.params.errCity} isn't a valid city. Please retry`}</Text> : null
+
         if (this.state.fontLoaded) {
             return (
                 <AppLoading />
@@ -60,6 +66,7 @@ export default class Home extends React.Component {
                             underlayColor='#fff'>
                             <Text style={[home.txtButton, {fontFamily: 'Montserrat-Light'}]}>SEARCH</Text>
                         </TouchableOpacity>
+                        {(this.state.emptyTxt) ? <Text style={[home.errMsg, {fontFamily: 'Montserrat-LightItalic'}]}>You have to enter a city.</Text> : errMsg}
                     </View>          
                 </ImageBackground>
             )
