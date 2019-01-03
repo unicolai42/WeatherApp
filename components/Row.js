@@ -21,13 +21,13 @@ export default class Row extends React.Component {
     icon = (weather) => {
         switch (weather) {
             case 'sun':
-                return require('../images/sun.png')
+                return require('../images/iconsWeather/sun.png')
                 break
             case 'rain':
-                return require('../images/rain.png')
+                return require('../images/iconsWeather/rain.png')
                 break
             default:
-                return require('../images/cloud.png')
+                return require('../images/iconsWeather/cloud.png')
         }
     }
 
@@ -45,7 +45,6 @@ export default class Row extends React.Component {
 
 const style = StyleSheet.create({
     view: {
-        backgroundColor: '#59a5e0',
         borderWidth: 0,
         borderBottomWidth: 1,
         borderBottomColor: '#202340',

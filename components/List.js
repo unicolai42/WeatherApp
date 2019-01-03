@@ -28,7 +28,7 @@ export default class List extends React.Component {
         this.fetchWeather()
     }
 
-    fetchWeather() {
+    fetchWeather = () => {
         axios.get(`https://api.openweathermap.org/data/2.5/forecast/daily?q=${this.state.city}&units=metric&appid=${openWeatherKey}`)
         .then(({data}) => {
             console.log('data', data)
@@ -46,11 +46,26 @@ export default class List extends React.Component {
         })
     }
 
+    imgWeather = (weatherId) => {
+        console.log(weatherId, 'hhhhhh')
+        if (weatherId === 800)
+            return require('../images/backgroundImg/clear.jpg')
+        else if (weatherId > 800 && weatherId < 805)
+            return require('../images/backgroundImg/clouds.jpg')
+        else if (weatherId >= 600 && weatherId <= 622)
+            return require('../images/backgroundImg/snow.jpg')
+        else if ((weatherId >= 300 && weatherId <= 321) || (weatherId >= 500 && weatherId <= 531))
+            return require('../images/backgroundImg/rain.jpg')
+        else if (weatherId >= 200 && weatherId <= 232)
+            return require('../images/backgroundImg/storm.jpg')
+        else
+            return require('../images/backgroundImg/others.jpg')
+    }
 
     render() {
         if (this.state.loaded)
             return (
-                <ImageBackground source={require('../images/home.jpg')} style={home.image} >    
+                <ImageBackground source={this.imgWeather(this.state.report.list[0].weather[0].id)} style={list.background} >    
                     <TouchableHighlight
                         onPress={() => {this.props.navigation.navigate('Home')}}>
                         <Image source={require('../images/return.png')} style={list.return} />
@@ -64,7 +79,9 @@ export default class List extends React.Component {
             )
         else
             return (
-                <ActivityIndicator color={'#0000ff'} size={'large'}/>
+                <ImageBackground source={require('../images/backgroundImg/home.jpg')} style={list.background} > 
+                    <ActivityIndicator color={'#0000ff'} size={'large'}/>
+                </ImageBackground>
             )
     } 
 }

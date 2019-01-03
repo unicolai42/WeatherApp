@@ -1,6 +1,6 @@
 module.exports = {
     home: {
-        image: {
+        background: {
             position: 'absolute',
             width: '100%',
             height: '100%',
@@ -56,6 +56,12 @@ module.exports = {
         }
     },
     list: {
+        background: {
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            justifyContent: 'center'
+        },
         return: {
             width: 32,
             height: 32,

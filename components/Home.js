@@ -46,11 +46,11 @@ export default class Home extends React.Component {
         }
         else
             return (
-                <ImageBackground source={require('../images/home.jpg')} style={home.image} >
+                <ImageBackground source={require('../images/backgroundImg/home.jpg')} style={home.background} >
                     <View style={home.container}>
                         <Text style={home.title}>Weather App</Text>
                         <View style={home.search}>
-                            <Image source={require('../images/weather.png')} style={home.iconWeather} />
+                            <Image source={require('../images/iconsWeather/weather.png')} style={home.iconWeather} />
                             <TextInput
                                 style={[home.input, {fontFamily: 'Montserrat-Light'}]}
                                 placeholder='Enter the name of a city'
