@@ -5,6 +5,7 @@ import axios from 'axios'
 import Row from './Row'
 import {openWeatherKey} from '../config/ApiKey'
 import {home, list} from './Style'
+import { View } from 'native-base';
 
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -31,15 +32,11 @@ export default class List extends React.Component {
     fetchWeather = () => {
         axios.get(`https://api.openweathermap.org/data/2.5/forecast/daily?q=${this.state.city}&units=metric&appid=${openWeatherKey}`)
         .then(({data}) => {
-            console.log('data', data)
             this.setState({
                 loaded: true,
                 report: data,
                 dataSource: ds.cloneWithRows(data.list)
             })
-        })
-        .then(() => {
-            console.log('report', this.state.report)
         })
         .catch((error) => {
             this.props.navigation.navigate('Home', {errCity: this.state.city})
@@ -47,7 +44,6 @@ export default class List extends React.Component {
     }
 
     imgWeather = (weatherId) => {
-        console.log(weatherId, 'hhhhhh')
         if (weatherId === 800)
             return require('../images/backgroundImg/clear.jpg')
         else if (weatherId > 800 && weatherId < 805)
@@ -62,6 +58,12 @@ export default class List extends React.Component {
             return require('../images/backgroundImg/others.jpg')
     }
 
+    actualWeather = () => {
+        return (
+
+        )
+    }
+
     render() {
         if (this.state.loaded)
             return (
@@ -69,7 +71,11 @@ export default class List extends React.Component {
                     <TouchableHighlight
                         onPress={() => {this.props.navigation.navigate('Home')}}>
                         <Image source={require('../images/return.png')} style={list.return} />
-                    </TouchableHighlight>            
+                    </TouchableHighlight>
+                    <View>
+                        <Text>{this.state.report.city.name}</Text>
+                        <Text>{this.actualWeather()}</Text>
+                    </View>        
                     <ListView
                         style={{marginTop: 20}}
                         dataSource={this.state.dataSource}

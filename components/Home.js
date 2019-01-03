@@ -36,7 +36,6 @@ export default class Home extends React.Component {
     }
 
     render() {
-        console.log('fevvv', this.props.navigation)
         let errMsg = (this.props.navigation.state.params) ? <Text style={[home.errMsg, {fontFamily: 'Montserrat-LightItalic'}]}>{`${this.props.navigation.state.params.errCity} isn't a valid city. Please retry`}</Text> : null
 
         if (this.state.fontLoaded) {
