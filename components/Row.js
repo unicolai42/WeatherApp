@@ -32,7 +32,6 @@ export default class Row extends React.Component {
     }
 
     render() {
-        console.log('moment 111', moment('HH')) ////LOOKING FOR ADD TIME NOW TO KNOW WHICH TEMP CHOOSE ID ITS THE DAY MORNING EVENING OR NIGHT AND PUT IT AFTER THE NAME PF THE CITY AND BEFORE THE STATE OF THE SKY
         console.log('okok', this.icon(this.props.data.weather[0].main.toLowerCase()))
         return (
             <View style={style.view}>

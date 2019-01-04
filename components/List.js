@@ -5,8 +5,10 @@ import axios from 'axios'
 import Row from './Row'
 import {openWeatherKey} from '../config/ApiKey'
 import {home, list} from './Style'
-import { View } from 'native-base';
-
+import { View, Text } from 'native-base';
+import Moment from 'moment-timezone'
+import 'moment/min/moment-with-locales'
+var timezoner = require('timezoner');
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
@@ -37,6 +39,7 @@ export default class List extends React.Component {
                 report: data,
                 dataSource: ds.cloneWithRows(data.list)
             })
+            Moment.locale(data.city.country.toLowerCase())
         })
         .catch((error) => {
             this.props.navigation.navigate('Home', {errCity: this.state.city})
@@ -59,12 +62,25 @@ export default class List extends React.Component {
     }
 
     actualWeather = () => {
-        return (
-
-        )
+        const temp = this.state.report.list[0].temp
+        const now = Moment().format('HH')
+        if (now > 22 || now < 7)
+            return Math.round(temp.night)
+        else if (now < 12)
+            return Math.round(temp.morn)
+        else if (now > 18)
+            return Math.round(temp.day)
+        else
+            return Math.round(temp.eve)
     }
 
     render() {
+        timezoner.getTimeZone(this.state.report.city.lat, this.state.report.city.lon)
+        .then((err, data) => {
+            console.log(data) /// TRY TO FIND A NPM TO HAVE ACCES TO COUNTRY/CITY CODE TO USE TZ FROM MOMENT TZ
+            console.log(Moment().tz(data.timeZoneId).format('HH')) ////LOOKING FOR ADD TIME NOW TO KNOW WHICH TEMP CHOOSE ID ITS THE DAY MORNING EVENING OR NIGHT AND PUT IT AFTER THE NAME PF THE CITY AND BEFORE THE STATE OF THE SKY            
+        })
+
         if (this.state.loaded)
             return (
                 <ImageBackground source={this.imgWeather(this.state.report.list[0].weather[0].id)} style={list.background} >    
