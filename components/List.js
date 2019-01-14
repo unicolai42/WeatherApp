@@ -9,11 +9,11 @@ import { View, Text } from 'native-base';
 import Moment from 'moment-timezone'
 import 'moment/min/moment-with-locales'
 
-const ct = require('countries-and-timezones');
  
-        
+const ct = require('countries-and-timezones');
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
 
 export default class List extends React.Component {
     static navigationOptions = ({navigation}) => {
@@ -45,10 +45,20 @@ export default class List extends React.Component {
             Moment.locale(data.city.country.toLowerCase())
         })
         .then(() => {
-            const mxTimezones = ct.getTimezonesForCountry(this.state.report.city.country);
-            console.log(mxTimezones, 'KKKKKKKKKK');
+            let mxTimezones = ct.getTimezonesForCountry(this.state.report.city.country);
+            const tz = new Date()
+            let timezoneZero = tz.getHours() - tz.getTimezoneOffset() / 60 * -1
+
+            if (timezoneZero < 0) {
+                timezoneZero += 24
+            }
+
+            const hour = timezoneZero + Math.round(mxTimezones[0].utcOffset / 60)
+
+            console.log(hour)
         })
         .catch((error) => {
+            console.log(error)
             this.props.navigation.navigate('Home', {errCity: this.state.city})
         })
     }
@@ -87,8 +97,7 @@ export default class List extends React.Component {
         //     console.log(data) /// TRY TO FIND A NPM TO HAVE ACCES TO COUNTRY/CITY CODE TO USE TZ FROM MOMENT TZ
         //     console.log(Moment().tz(data.timeZoneId).format('HH')) ////LOOKING FOR ADD TIME NOW TO KNOW WHICH TEMP CHOOSE ID ITS THE DAY MORNING EVENING OR NIGHT AND PUT IT AFTER THE NAME PF THE CITY AND BEFORE THE STATE OF THE SKY            
         // })
-        console.log(this.state.report)
-
+            
         if (this.state.loaded)
             return (
                 <ImageBackground source={this.imgWeather(this.state.report.list[0].weather[0].id)} style={list.background} >    
