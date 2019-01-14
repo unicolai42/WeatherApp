@@ -67,6 +67,23 @@ module.exports = {
             height: 32,
             marginTop: 35,
             marginLeft: 3
+        },
+        titles: {
+            color: 'white'
+        },
+        frameTitle: {
+            borderColor: 'red',
+            borderWidth: 1,
+            alignItems: 'center',
+        },
+        cityTitle: {
+            fontSize: 20
+        },
+        weatherTitle: {
+            fontSize: 17
+        },
+        tempTitle: {
+            fontSize: 55
         }
     }
 }

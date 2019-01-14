@@ -1,13 +1,12 @@
 import React from 'react'
 import {ListView, ImageBackground, TouchableHighlight, Image, ActivityIndicator} from 'react-native'
 import axios from 'axios'
+import { Font, AppLoading } from "expo"
 
 import Row from './Row'
 import {openWeatherKey} from '../config/ApiKey'
 import {home, list} from './Style'
-import { View, Text } from 'native-base';
-import Moment from 'moment-timezone'
-import 'moment/min/moment-with-locales'
+import { View, Text } from 'native-base'
 
  
 const ct = require('countries-and-timezones');
@@ -27,7 +26,17 @@ export default class List extends React.Component {
         city: this.props.navigation.state.params.city,
         report: {},
         dataSource: ds,
-        loaded: false
+        loaded: false,
+        fontLoaded: true
+    }
+
+    async componentWillMount() {
+        await Font.loadAsync({
+          'Montserrat-Light': require('../assets/fonts/Montserrat-Light.ttf'),
+          'Montserrat-Regular': require('../assets/fonts/Montserrat-Regular.ttf'),
+          'Montserrat-SemiBold': require('../assets/fonts/Montserrat-SemiBold.ttf')
+        })
+        this.setState({ fontLoaded: false });
     }
 
     componentDidMount() {
@@ -42,20 +51,6 @@ export default class List extends React.Component {
                 report: data,
                 dataSource: ds.cloneWithRows(data.list)
             })
-            Moment.locale(data.city.country.toLowerCase())
-        })
-        .then(() => {
-            let mxTimezones = ct.getTimezonesForCountry(this.state.report.city.country);
-            const tz = new Date()
-            let timezoneZero = tz.getHours() - tz.getTimezoneOffset() / 60 * -1
-
-            if (timezoneZero < 0) {
-                timezoneZero += 24
-            }
-
-            const hour = timezoneZero + Math.round(mxTimezones[0].utcOffset / 60)
-
-            console.log(hour)
         })
         .catch((error) => {
             console.log(error)
@@ -64,6 +59,7 @@ export default class List extends React.Component {
     }
 
     imgWeather = (weatherId) => {
+        console.log(this.state.report.list[0].weather[0].main, 'state weather')
         if (weatherId === 800)
             return require('../images/backgroundImg/clear.jpg')
         else if (weatherId > 800 && weatherId < 805)
@@ -79,35 +75,43 @@ export default class List extends React.Component {
     }
 
     actualWeather = () => {
-        const temp = this.state.report.list[0].temp
-        const now = Moment().format('HH')
-        if (now > 22 || now < 7)
+    const temp = this.state.report.list[0].temp
+    let mxTimezones = ct.getTimezonesForCountry(this.state.report.city.country);
+        const tz = new Date()
+        let timezoneZero = tz.getHours() - tz.getTimezoneOffset() / 60 * -1
+
+        if (timezoneZero < 0) {
+            timezoneZero += 24
+        }
+
+        const hour = timezoneZero + Math.round(mxTimezones[0].utcOffset / 60)
+
+        console.log(hour)
+        if (hour > 22 || hour < 7)
             return Math.round(temp.night)
-        else if (now < 12)
+        else if (hour < 12)
             return Math.round(temp.morn)
-        else if (now > 18)
+        else if (hour > 18)
             return Math.round(temp.day)
         else
             return Math.round(temp.eve)
     }
 
     render() {
-        // timezoner.getTimeZone(this.state.report.city.lat, this.state.report.city.lon)
-        // .then((err, data) => {
-        //     console.log(data) /// TRY TO FIND A NPM TO HAVE ACCES TO COUNTRY/CITY CODE TO USE TZ FROM MOMENT TZ
-        //     console.log(Moment().tz(data.timeZoneId).format('HH')) ////LOOKING FOR ADD TIME NOW TO KNOW WHICH TEMP CHOOSE ID ITS THE DAY MORNING EVENING OR NIGHT AND PUT IT AFTER THE NAME PF THE CITY AND BEFORE THE STATE OF THE SKY            
-        // })
-            
-        if (this.state.loaded)
+        if (this.state.loaded && !this.state.fontLoaded)
             return (
                 <ImageBackground source={this.imgWeather(this.state.report.list[0].weather[0].id)} style={list.background} >    
                     <TouchableHighlight
                         onPress={() => {this.props.navigation.navigate('Home')}}>
                         <Image source={require('../images/return.png')} style={list.return} />
                     </TouchableHighlight>
-                    <View>
-                        <Text>{this.state.report.city.name}</Text>
-                        <Text>{this.actualWeather()}</Text>
+                    <View style={list.frameTitle}>
+                        <Text style={[list.titles, {fontFamily: 'Montserrat-Regular'}, list.cityTitle]}>{this.state.report.city.name}</Text>
+                        <Text style={[list.titles, {fontFamily: 'Montserrat-Light'}, list.weatherTitle]}>{this.state.report.list[0].weather[0].main}</Text>
+                        <Text style={[list.titles, {fontFamily: 'Montserrat-Light'}>
+                            <Text style={[list.titles, {fontFamily: 'Montserrat-Light'}, list.tempTitle]}>{this.actualWeather()}</Text>
+                            <Text style={[list.titles, {fontSize: 14}]}>°</Text>
+                        </Text>
                     </View>        
                     <ListView
                         style={{marginTop: 20}}
