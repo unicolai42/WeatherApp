@@ -72,8 +72,6 @@ module.exports = {
             color: 'white'
         },
         frameTitle: {
-            borderColor: 'red',
-            borderWidth: 1,
             alignItems: 'center',
         },
         cityTitle: {
@@ -83,7 +81,15 @@ module.exports = {
             fontSize: 17
         },
         tempTitle: {
-            fontSize: 55
+            flexDirection: 'row'
+        },
+        number: {
+            fontSize: 90,
+        },
+        celsius: {
+            marginTop: 15,
+            fontSize: 32,
+            textAlignVertical: 'top'
         }
     }
 }

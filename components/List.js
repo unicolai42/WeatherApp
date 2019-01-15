@@ -33,8 +33,8 @@ export default class List extends React.Component {
     async componentWillMount() {
         await Font.loadAsync({
           'Montserrat-Light': require('../assets/fonts/Montserrat-Light.ttf'),
-          'Montserrat-Regular': require('../assets/fonts/Montserrat-Regular.ttf'),
-          'Montserrat-SemiBold': require('../assets/fonts/Montserrat-SemiBold.ttf')
+          'Montserrat-ExtraLight': require('../assets/fonts/Montserrat-ExtraLight.ttf'),
+          'Montserrat-Regular': require('../assets/fonts/Montserrat-Regular.ttf')
         })
         this.setState({ fontLoaded: false });
     }
@@ -108,13 +108,13 @@ export default class List extends React.Component {
                     <View style={list.frameTitle}>
                         <Text style={[list.titles, {fontFamily: 'Montserrat-Regular'}, list.cityTitle]}>{this.state.report.city.name}</Text>
                         <Text style={[list.titles, {fontFamily: 'Montserrat-Light'}, list.weatherTitle]}>{this.state.report.list[0].weather[0].main}</Text>
-                        <Text style={[list.titles, {fontFamily: 'Montserrat-Light'}>
-                            <Text style={[list.titles, {fontFamily: 'Montserrat-Light'}, list.tempTitle]}>{this.actualWeather()}</Text>
-                            <Text style={[list.titles, {fontSize: 14}]}>°</Text>
-                        </Text>
+                        <View style={[list.titles, {fontFamily: 'Montserrat-Light'}, list.tempTitle]}>
+                            <Text style={[list.titles, {fontFamily: 'Montserrat-ExtraLight'}, list.number]}>{this.actualWeather()}</Text>
+                            <Text style={[list.titles, {fontFamily: 'Montserrat-Light'}, list.celsius]}>°</Text>
+                        </View>
                     </View>        
                     <ListView
-                        style={{marginTop: 20}}
+                        style={{marginTop: 150}}
                         dataSource={this.state.dataSource}
                         renderRow={(rowData, s, i) => <Row index={parseInt(i, 10)} data={rowData} />}
                     />
