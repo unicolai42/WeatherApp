@@ -4,6 +4,8 @@ import Moment from 'moment'
 import 'moment/locale/fr'
 import { Font } from 'expo'
 
+import {style} from './Style'
+
 Moment.locale('fr')
 
 export default class Row extends React.Component {
@@ -34,29 +36,11 @@ export default class Row extends React.Component {
     render() {
         console.log('okok', this.icon(this.props.data.weather[0].main.toLowerCase()))
         return (
-            <View style={style.view}>
-                <Text>{this.date(this.props.data.dt)}</Text>
-                <Image source={this.icon(this.props.data.weather[0].main.toLowerCase())} />
-                <Text style={style.temp}>{Math.round(this.props.data.temp.day)}°C</Text>
+            <View style={style.row.view}>
+                <Text style={style.row.date}>{this.date(this.props.data.dt)}</Text>
+                <Image style={style.row.icon} source={this.icon(this.props.data.weather[0].main.toLowerCase())} />
+                <Text style={style.row.temp}>{Math.round(this.props.data.temp.day)}°C</Text>
             </View>
         )
     }
 }
-
-const style = StyleSheet.create({
-    view: {
-        borderWidth: 0,
-        borderBottomWidth: 1,
-        borderBottomColor: '#202340',
-        paddingHorizontal: 20,
-        paddingVertical: 10,
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    temp: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 22
-    }
-})

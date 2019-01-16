@@ -3,7 +3,7 @@ import {TouchableOpacity, TextInput, View, Text, ImageBackground, Image} from 'r
 // import {createStackNavigator} from 'react-navigation'
 import { Font, AppLoading } from "expo"
 
-import {home} from './Style'
+import {style} from './Style'
 
 export default class Home extends React.Component {
     static navigationOptions = {
@@ -36,7 +36,7 @@ export default class Home extends React.Component {
     }
 
     render() {
-        let errMsg = (this.props.navigation.state.params) ? <Text style={[home.errMsg, {fontFamily: 'Montserrat-LightItalic'}]}>{`${this.props.navigation.state.params.errCity} isn't a valid city. Please retry`}</Text> : null
+        let errMsg = (this.props.navigation.state.params) ? <Text style={[style.home.errMsg, {fontFamily: 'Montserrat-LightItalic'}]}>{`${this.props.navigation.state.params.errCity} isn't a valid city. Please retry`}</Text> : null
 
         if (this.state.fontLoaded) {
             return (
@@ -45,13 +45,13 @@ export default class Home extends React.Component {
         }
         else
             return (
-                <ImageBackground source={require('../images/backgroundImg/home.jpg')} style={home.background} >
-                    <View style={home.container}>
-                        <Text style={home.title}>Weather App</Text>
-                        <View style={home.search}>
-                            <Image source={require('../images/iconsWeather/weather.png')} style={home.iconWeather} />
+                <ImageBackground source={require('../images/backgroundImg/home.jpg')} style={style.home.background} >
+                    <View style={style.home.container}>
+                        <Text style={style.home.title}>Weather App</Text>
+                        <View style={style.home.search}>
+                            <Image source={require('../images/iconsWeather/weather.png')} style={style.home.iconWeather} />
                             <TextInput
-                                style={[home.input, {fontFamily: 'Montserrat-Light'}]}
+                                style={[style.home.input, {fontFamily: 'Montserrat-Light'}]}
                                 placeholder='Enter the name of a city'
                                 placeholderTextColor='#f9f9f9'
                                 onChangeText={(search) => this.setState({search})}
@@ -60,12 +60,12 @@ export default class Home extends React.Component {
                             />
                         </View>
                         <TouchableOpacity
-                            style={home.button}
+                            style={style.home.button}
                             onPress={() => {this.submit()}}
                             underlayColor='#fff'>
-                            <Text style={[home.txtButton, {fontFamily: 'Montserrat-Light'}]}>SEARCH</Text>
+                            <Text style={[style.home.txtButton, {fontFamily: 'Montserrat-Light'}]}>SEARCH</Text>
                         </TouchableOpacity>
-                        {(this.state.emptyTxt) ? <Text style={[home.errMsg, {fontFamily: 'Montserrat-LightItalic'}]}>You have to enter a city.</Text> : errMsg}
+                        {(this.state.emptyTxt) ? <Text style={[style.home.errMsg, {fontFamily: 'Montserrat-LightItalic'}]}>You have to enter a city.</Text> : errMsg}
                     </View>          
                 </ImageBackground>
             )

@@ -1,4 +1,6 @@
-module.exports = {
+import {StyleSheet} from 'react-native'
+
+let style = StyleSheet.create({
     home: {
         background: {
             position: 'absolute',
@@ -91,5 +93,30 @@ module.exports = {
             fontSize: 32,
             textAlignVertical: 'top'
         }
+    },
+    row: {
+        view: {
+            borderWidth: 0,
+            borderBottomWidth: 1,
+            borderBottomColor: '#202340',
+            paddingHorizontal: 20,
+            paddingVertical: 10,
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+        },
+        date: {
+
+        },
+        icon: {
+            
+        },
+        temp: {
+            color: 'white',
+            fontWeight: 'bold',
+            fontSize: 22
+        }
     }
-}
+})
+
+export default style
