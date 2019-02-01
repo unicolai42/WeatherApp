@@ -1,121 +1,115 @@
 import {StyleSheet} from 'react-native'
 
 let style = StyleSheet.create({
-    home: {
-        background: {
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            justifyContent: 'center'
-        },
-        container: {
-            height: '65%'
-        },
-        title: {
-            fontFamily: 'Montserrat-Light',
-            fontSize: 42,
-            color: 'white',
-            textAlign: 'center'
-        },
-        search: {
-            borderBottomColor: '#e0e0e0',
-            borderBottomWidth: 1,
-            marginTop: '30%',
-            marginRight: '10%',
-            marginLeft: '10%',
-            flexDirection: 'row',
-            paddingBottom: 7
-        },
-        iconWeather: {
-            width: 22,
-            height: 22,
-            marginRight: 10
-        },
-        input: {
-            fontSize: 17,
-            fontStyle: 'italic',
-            alignItems: 'flex-end',
-            height: 22,
-            color: '#fff'
-        },
-        button: {
-            backgroundColor: 'white',
-            borderRadius: 2,
-            marginRight: '10%',
-            marginLeft: '10%',
-            marginTop: 15,
-            paddingVertical: 8,
-        },
-        txtButton: {
-            color: '#d5aaed',
-            fontSize: 17,
-            textAlign: 'center'
-        },
-        errMsg: {
-            color: 'red',
-            textAlign: 'center',
-            marginTop: 10
-        }
+    homeBackground: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center'
     },
-    list: {
-        background: {
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            justifyContent: 'center'
-        },
-        return: {
-            width: 32,
-            height: 32,
-            marginTop: 35,
-            marginLeft: 3
-        },
-        titles: {
-            color: 'white'
-        },
-        frameTitle: {
-            alignItems: 'center',
-        },
-        cityTitle: {
-            fontSize: 20
-        },
-        weatherTitle: {
-            fontSize: 17
-        },
-        tempTitle: {
-            flexDirection: 'row'
-        },
-        number: {
-            fontSize: 90,
-        },
-        celsius: {
-            marginTop: 15,
-            fontSize: 32,
-            textAlignVertical: 'top'
-        }
+    homeContainer: {
+        height: '65%'
     },
-    row: {
-        view: {
-            borderWidth: 0,
-            borderBottomWidth: 1,
-            borderBottomColor: '#202340',
-            paddingHorizontal: 20,
-            paddingVertical: 10,
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'space-between'
-        },
-        date: {
+    homeTitle: {
+        fontFamily: 'Montserrat-Light',
+        fontSize: 42,
+        color: 'white',
+        textAlign: 'center'
+    },
+    homeSearch: {
+        borderBottomColor: '#e0e0e0',
+        borderBottomWidth: 1,
+        marginTop: '30%',
+        marginRight: '10%',
+        marginLeft: '10%',
+        flexDirection: 'row',
+        paddingBottom: 7
+    },
+    homeIconWeather: {
+        width: 22,
+        height: 22,
+        marginRight: 10
+    },
+    homeInput: {
+        fontSize: 17,
+        fontStyle: 'italic',
+        alignItems: 'flex-end',
+        height: 22,
+        color: '#fff'
+    },
+    homeButton: {
+        backgroundColor: 'white',
+        borderRadius: 2,
+        marginRight: '10%',
+        marginLeft: '10%',
+        marginTop: 15,
+        paddingVertical: 8,
+    },
+    homeTxtButton: {
+        color: '#d5aaed',
+        fontSize: 17,
+        textAlign: 'center'
+    },
+    homeErrMsg: {
+        color: 'red',
+        textAlign: 'center',
+        marginTop: 10
+    },
+    listBackground: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center'
+    },
+    listReturn: {
+        width: 32,
+        height: 32,
+        marginTop: 35,
+        marginLeft: 3
+    },
+    listTitles: {
+        color: 'white'
+    },
+    listFrameTitle: {
+        alignItems: 'center',
+    },
+    listCityTitle: {
+        fontSize: 20
+    },
+    listWeatherTitle: {
+        fontSize: 17
+    },
+    listTempTitle: {
+        flexDirection: 'row'
+    },
+    listNumber: {
+        fontSize: 90,
+    },
+    listCelsius: {
+        marginTop: 15,
+        fontSize: 32,
+        textAlignVertical: 'top'
+    },
+    rowView: {
+        borderWidth: 0,
+        borderBottomWidth: 1,
+        borderBottomColor: '#202340',
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    rowDate: {
 
-        },
-        icon: {
-            
-        },
-        temp: {
-            color: 'white',
-            fontWeight: 'bold',
-            fontSize: 22
-        }
+    },
+    rowIcon: {
+        
+    },
+    rowTemp: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 22
     }
 })
 

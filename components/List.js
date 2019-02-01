@@ -5,7 +5,7 @@ import { Font, AppLoading } from "expo"
 
 import Row from './Row'
 import {openWeatherKey} from '../config/ApiKey'
-import {style} from './Style'
+import style from './Style'
 import { View, Text } from 'native-base'
 
  
@@ -100,17 +100,17 @@ export default class List extends React.Component {
     render() {
         if (this.state.loaded && !this.state.fontLoaded)
             return (
-                <ImageBackground source={this.imgWeather(this.state.report.list[0].weather[0].id)} style={style.list.background} >    
+                <ImageBackground source={this.imgWeather(this.state.report.list[0].weather[0].id)} style={style.list.Background} >    
                     <TouchableHighlight
                         onPress={() => {this.props.navigation.navigate('Home')}}>
-                        <Image source={require('../images/return.png')} style={style.list.return} />
+                        <Image source={require('../images/return.png')} style={style.list.eturn} />
                     </TouchableHighlight>
-                    <View style={style.list.frameTitle}>
-                        <Text style={[style.list.titles, {fontFamily: 'Montserrat-Regular'}, style.list.cityTitle]}>{this.state.report.city.name}</Text>
-                        <Text style={[style.list.titles, {fontFamily: 'Montserrat-Light'}, style.list.weatherTitle]}>{this.state.report.list[0].weather[0].main}</Text>
-                        <View style={[style.list.titles, {fontFamily: 'Montserrat-Light'}, style.list.tempTitle]}>
-                            <Text style={[style.list.titles, {fontFamily: 'Montserrat-ExtraLight'}, style.list.number]}>{this.actualWeather()}</Text>
-                            <Text style={[style.list.titles, {fontFamily: 'Montserrat-Light'}, style.list.celsius]}>°</Text>
+                    <View style={style.listFrameTitle}>
+                        <Text style={[style.listTitles, {fontFamily: 'Montserrat-Regular'}, style.listCityTitle]}>{this.state.report.city.name}</Text>
+                        <Text style={[style.listTitles, {fontFamily: 'Montserrat-Light'}, style.listWeatherTitle]}>{this.state.report.list[0].weather[0].main}</Text>
+                        <View style={[style.listTitles, {fontFamily: 'Montserrat-Light'}, style.listTempTitle]}>
+                            <Text style={[style.listTitles, {fontFamily: 'Montserrat-ExtraLight'}, style.listNumber]}>{this.actualWeather()}</Text>
+                            <Text style={[style.listTitles, {fontFamily: 'Montserrat-Light'}, style.listCelsius]}>°</Text>
                         </View>
                     </View>        
                     <ListView
@@ -122,7 +122,7 @@ export default class List extends React.Component {
             )
         else
             return (
-                <ImageBackground source={require('../images/backgroundImg/home.jpg')} style={style.list.background} > 
+                <ImageBackground source={require('../images/backgroundImg/home.jpg')} style={style.listBackground} > 
                     <ActivityIndicator color={'#0000ff'} size={'large'}/>
                 </ImageBackground>
             )

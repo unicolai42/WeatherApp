@@ -36,10 +36,10 @@ export default class Row extends React.Component {
     render() {
         console.log('okok', this.icon(this.props.data.weather[0].main.toLowerCase()))
         return (
-            <View style={style.row.view}>
-                <Text style={style.row.date}>{this.date(this.props.data.dt)}</Text>
-                <Image style={style.row.icon} source={this.icon(this.props.data.weather[0].main.toLowerCase())} />
-                <Text style={style.row.temp}>{Math.round(this.props.data.temp.day)}°C</Text>
+            <View style={style.rowView}>
+                <Text style={style.rowDate}>{this.date(this.props.data.dt)}</Text>
+                <Image style={style.rowIcon} source={this.icon(this.props.data.weather[0].main.toLowerCase())} />
+                <Text style={style.rowTemp}>{Math.round(this.props.data.temp.day)}°C</Text>
             </View>
         )
     }
